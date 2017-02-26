@@ -2,6 +2,13 @@
 
 It is simple avatar generator. It may be useful for example for chats.
 
+Creates a picture that has squares with different colors and rotation.
+
+### Demo
+
+![Demo 1](examples/demo1.png?raw=true "Demo 1")
+![Demo 2](examples/demo2.png?raw=true "Demo 2")
+
 ### Requirements
 
 - Python 3.6
