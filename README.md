@@ -1,4 +1,4 @@
-# py-avatar-generator
+# simple-avatar-generator
 
 It is simple avatar generator. It may be useful for example for chats.
 
