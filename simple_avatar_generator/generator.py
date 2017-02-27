@@ -47,15 +47,21 @@ class BlurRadiusField(TypeIntRequiredField, MinValueField):
     min_value = 0
 
 
+class RotateField(TypeIntRequiredField):
+    pass
+
+
 class AvatarGenerator(object):
     side_sizes = SideSizesField()
     squares_quantity_on_axis = SquaresQuantityOnAxisField()
     blur_radius = BlurRadiusField()
+    rotate = RotateField()
 
     def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4),
-                 blur_radius=3):
+                 blur_radius=3, rotate=randint(0, 360)):
         self.side_sizes = side_sizes
         self.blur_radius = blur_radius
+        self.rotate = rotate
         self.squares_quantity_on_axis = squares_quantity_on_axis
         self.distance = self.side_sizes // self.squares_quantity_on_axis
         self.img = Image.new('RGB', (self.side_sizes, self.side_sizes))
@@ -78,14 +84,13 @@ class AvatarGenerator(object):
                     ),
                     fill=self.get_random_color())
 
-        self.img = self.img.rotate(randint(0, 360))
+        self.img = self.img.rotate(self.rotate)
         self.img = self.img.crop((
             self.side_sizes / 4,
             self.side_sizes / 4,
             self.side_sizes - self.side_sizes / 4,
             self.side_sizes - self.side_sizes / 4
         ))
-
         self.img = self.img.filter(ImageFilter.GaussianBlur(self.blur_radius))
 
         return self.img
