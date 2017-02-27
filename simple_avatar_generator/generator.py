@@ -1,40 +1,45 @@
+from random import randint
+
 from PIL import Image, ImageDraw
-import random
 
 
-class ImageSize(object):
-    def __get__(self, obj, objtype):
-        return self.val
+class ValidationField(object):
 
-    def __set__(self, obj, val):
+    def __set_name__(self, owner, name):
+        self.name = name
 
-        if type(val) != int:
+    def __get__(self, instance, owner):
+        return instance.__dict__[self.name]
+
+
+class SideSizesField(ValidationField):
+
+    def __set__(self, instance, value):
+        if type(value) != int:
             raise TypeError('Value for side_sizes may be only int.')
 
-        if val < 4:
+        if value < 4:
             raise ValueError('Min value for side_sizes is 4.')
 
-        self.val = val
+        instance.__dict__[self.name] = value
 
 
-class SquaresQuantity(object):
-    def __get__(self, obj, objtype):
-        return self.val
+class SquaresQuantityOnAxisField(ValidationField):
 
-    def __set__(self, obj, val):
+    def __set__(self, instance, value):
 
-        if type(val) != int:
+        if type(value) != int:
             raise TypeError('Value for squares_quantity may be only int.')
 
-        if val <= 0:
+        if value <= 0:
             raise ValueError('Min value for squares_quantity is 1.')
 
-        self.val = val
+        instance.__dict__[self.name] = value
 
 
 class AvatarGenerator(object):
-    side_sizes = ImageSize()
-    squares_quantity_on_axis = SquaresQuantity()
+    side_sizes = SideSizesField()
+    squares_quantity_on_axis = SquaresQuantityOnAxisField()
 
     def __init__(self, side_sizes, squares_quantity_on_axis):
         self.side_sizes = side_sizes
@@ -45,7 +50,7 @@ class AvatarGenerator(object):
 
     @staticmethod
     def get_random_color():
-        color = '#' + ''.join([f'{random.randint(0, 255):02X}' for _ in range(3)])
+        color = '#' + ''.join([f'{randint(0, 255):02X}' for _ in range(3)])
         return color
 
     def generate(self):
@@ -60,7 +65,7 @@ class AvatarGenerator(object):
                     ),
                     fill=self.get_random_color())
 
-        self.img = self.img.rotate(random.randint(0, 360))
+        self.img = self.img.rotate(randint(0, 360))
         self.img = self.img.crop((
             self.side_sizes / 4,
             self.side_sizes / 4,
