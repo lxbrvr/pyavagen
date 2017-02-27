@@ -31,8 +31,4 @@ The AvatarGenerator class takes two arguments:
 
 ### Methods
 
-**generate()** - generates a picture.
-
-**save(filename='output.png')** - saves a picture on the disk. Takes an one argument - **filename**.
-
-**show()** - this method from PIL. Provides a ability to view a picture.
+**generate()** - generates a picture. Returns the PIL Image object.

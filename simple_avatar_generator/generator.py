@@ -74,6 +74,3 @@ class AvatarGenerator(object):
         ))
 
         return self.img
-
-    def save(self, filename):
-        self.img.save(filename)
