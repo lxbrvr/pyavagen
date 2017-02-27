@@ -12,22 +12,17 @@ class Field(object):
     def __get__(self, instance, owner):
         return instance.__dict__[self.name]
 
-    def __set__(self, instance, value):
-        instance.__dict__[self.name] = value
-
 
 class RequiredTypeField(Field):
     required_type = None
 
     def __set__(self, instance, value):
-        print(self.required_type)
-        print(isinstance(value, self.required_type))
         if not isinstance(value, self.required_type):
             raise TypeError(
                 f'{self.name}: may be only {self.required_type} type.'
             )
 
-        super(RequiredTypeField, self).__set__(instance, value)
+        instance.__dict__[self.name] = value
 
 
 class MinValueField(Field):
@@ -40,7 +35,7 @@ class MinValueField(Field):
                 f'{self.name}: min is {self.min_value}.'
             )
 
-        super(MinValueField, self).__set__(instance, value)
+        instance.__dict__[self.name] = value
 
 
 class SideSizesField(RequiredTypeField, MinValueField):
@@ -66,12 +61,15 @@ class BorderField(RequiredTypeField):
     required_type = str
 
     def __set__(self, instance, value):
-        try:
-            ImageColor.getcolor(value, 'RGB')
-        except Exception as e:
-            raise ValueError(f'{self.name}: {e}')
-
         super(BorderField, self).__set__(instance, value)
+
+        if value != '':
+            try:
+                ImageColor.getcolor(value, 'RGB')
+            except Exception as e:
+                raise ValueError(f'{self.name}: {e}')
+
+        instance.__dict__[self.name] = value
 
 
 class AvatarGenerator(object):
