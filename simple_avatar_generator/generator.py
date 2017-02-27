@@ -3,7 +3,7 @@ from random import randint
 from PIL import Image, ImageDraw, ImageFilter
 
 
-class ValidationField(object):
+class Field(object):
 
     def __set_name__(self, owner, name):
         self.name = name
@@ -11,43 +11,40 @@ class ValidationField(object):
     def __get__(self, instance, owner):
         return instance.__dict__[self.name]
 
-
-class SideSizesField(ValidationField):
-
     def __set__(self, instance, value):
-        if type(value) != int:
-            raise TypeError('Value for side_sizes may be only int.')
-
-        if value < 4:
-            raise ValueError('Min value for side_sizes is 4.')
-
         instance.__dict__[self.name] = value
 
 
-class SquaresQuantityOnAxisField(ValidationField):
-
+class TypeIntRequiredField(Field):
     def __set__(self, instance, value):
 
         if type(value) != int:
-            raise TypeError('Value for squares_quantity may be only int.')
+            raise TypeError(f'Value for {self.name} may be only int type.')
 
-        if value <= 0:
-            raise ValueError('Min value for squares_quantity is 1.')
-
-        instance.__dict__[self.name] = value
+        super(TypeIntRequiredField, self).__set__(instance, value)
 
 
-class BlurRadiusField(ValidationField):
+class MinValueField(Field):
+    min_value = None
 
     def __set__(self, instance, value):
 
-        if type(value) != int:
-            raise TypeError('Value for blur_radius may be only int.')
+        if value < self.min_value:
+            raise ValueError(f'Min value for {self.name} is {self.min_value}.')
 
-        if value <= 0:
-            raise ValueError('Min value for blur_radius is 0.')
+        super(MinValueField, self).__set__(instance, value)
 
-        instance.__dict__[self.name] = value
+
+class SideSizesField(TypeIntRequiredField, MinValueField):
+    min_value = 4
+
+
+class SquaresQuantityOnAxisField(TypeIntRequiredField, MinValueField):
+    min_value = 1
+
+
+class BlurRadiusField(TypeIntRequiredField, MinValueField):
+    min_value = 0
 
 
 class AvatarGenerator(object):
