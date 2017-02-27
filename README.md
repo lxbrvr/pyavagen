@@ -16,18 +16,19 @@ Creates a picture that has squares with different colors and rotation.
 
 ### Using
 
-    avatar = AvatarGenerator(
-        side_sizes=800, 
-        squares_quantity_on_axis=4
-    ).generate()
-    
+    avatar = AvatarGenerator(side_sizes=800).generate()
     avatar.save('output.png')
     
 The AvatarGenerator class takes two arguments:
 
-1. **side_sizes** - size of sides for generated squares. The value measured in pixels.
+1. **side_sizes** - required. 
 
-2. **squares_quantity_on_axis** - quantity of squares on axis. For example if squares_quantity_on_axis value is 4, that total squares on generated picture be 16.
+Size of sides for generated squares. The value measured in pixels.
+
+2. **squares_quantity_on_axis** - optional. 
+
+By default random number from 3 to 4. 
+For example if squares_quantity_on_axis value is 4, that total squares on generated picture be 16.
 
 ### Methods
 

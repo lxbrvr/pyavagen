@@ -41,7 +41,7 @@ class AvatarGenerator(object):
     side_sizes = SideSizesField()
     squares_quantity_on_axis = SquaresQuantityOnAxisField()
 
-    def __init__(self, side_sizes, squares_quantity_on_axis):
+    def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4)):
         self.side_sizes = side_sizes
         self.squares_quantity_on_axis = squares_quantity_on_axis
         self.distance = self.side_sizes // self.squares_quantity_on_axis
