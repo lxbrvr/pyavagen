@@ -8,6 +8,8 @@ Creates a picture that has squares with different colors and rotation.
 
 ![Demo 1](examples/demo1.png?raw=true "Demo 1")
 ![Demo 2](examples/demo2.png?raw=true "Demo 2")
+![Demo 3](examples/demo3.png?raw=true "Demo 3")
+![Demo 4](examples/demo4.png?raw=true "Demo 4")
 
 ### Requirements
 
