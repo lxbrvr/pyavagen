@@ -1,6 +1,6 @@
 from random import randint
 
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageFilter
 
 
 class ValidationField(object):
@@ -37,12 +37,28 @@ class SquaresQuantityOnAxisField(ValidationField):
         instance.__dict__[self.name] = value
 
 
+class BlurRadiusField(ValidationField):
+
+    def __set__(self, instance, value):
+
+        if type(value) != int:
+            raise TypeError('Value for blur_radius may be only int.')
+
+        if value <= 0:
+            raise ValueError('Min value for blur_radius is 0.')
+
+        instance.__dict__[self.name] = value
+
+
 class AvatarGenerator(object):
     side_sizes = SideSizesField()
     squares_quantity_on_axis = SquaresQuantityOnAxisField()
+    blur_radius = BlurRadiusField()
 
-    def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4)):
+    def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4),
+                 blur_radius=3):
         self.side_sizes = side_sizes
+        self.blur_radius = blur_radius
         self.squares_quantity_on_axis = squares_quantity_on_axis
         self.distance = self.side_sizes // self.squares_quantity_on_axis
         self.img = Image.new('RGB', (self.side_sizes, self.side_sizes))
@@ -72,5 +88,7 @@ class AvatarGenerator(object):
             self.side_sizes - self.side_sizes / 4,
             self.side_sizes - self.side_sizes / 4
         ))
+
+        self.img = self.img.filter(ImageFilter.GaussianBlur(self.blur_radius))
 
         return self.img
