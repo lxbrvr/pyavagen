@@ -1,6 +1,7 @@
 from random import randint
 
 from PIL import Image, ImageDraw, ImageFilter
+from PIL import ImageColor
 
 
 class Field(object):
@@ -15,13 +16,18 @@ class Field(object):
         instance.__dict__[self.name] = value
 
 
-class TypeIntRequiredField(Field):
+class RequiredTypeField(Field):
+    required_type = None
+
     def __set__(self, instance, value):
+        print(self.required_type)
+        print(isinstance(value, self.required_type))
+        if not isinstance(value, self.required_type):
+            raise TypeError(
+                f'{self.name}: may be only {self.required_type} type.'
+            )
 
-        if type(value) != int:
-            raise TypeError(f'Value for {self.name} may be only int type.')
-
-        super(TypeIntRequiredField, self).__set__(instance, value)
+        super(RequiredTypeField, self).__set__(instance, value)
 
 
 class MinValueField(Field):
@@ -30,25 +36,42 @@ class MinValueField(Field):
     def __set__(self, instance, value):
 
         if value < self.min_value:
-            raise ValueError(f'Min value for {self.name} is {self.min_value}.')
+            raise ValueError(
+                f'{self.name}: min is {self.min_value}.'
+            )
 
         super(MinValueField, self).__set__(instance, value)
 
 
-class SideSizesField(TypeIntRequiredField, MinValueField):
+class SideSizesField(RequiredTypeField, MinValueField):
+    required_type = int
     min_value = 4
 
 
-class SquaresQuantityOnAxisField(TypeIntRequiredField, MinValueField):
+class SquaresQuantityOnAxisField(RequiredTypeField, MinValueField):
+    required_type = int
     min_value = 1
 
 
-class BlurRadiusField(TypeIntRequiredField, MinValueField):
+class BlurRadiusField(RequiredTypeField, MinValueField):
+    required_type = int
     min_value = 0
 
 
-class RotateField(TypeIntRequiredField):
-    pass
+class RotateField(RequiredTypeField):
+    required_type = int
+
+
+class BorderField(RequiredTypeField):
+    required_type = str
+
+    def __set__(self, instance, value):
+        try:
+            ImageColor.getcolor(value, 'RGB')
+        except Exception as e:
+            raise ValueError(f'{self.name}: {e}')
+
+        super(BorderField, self).__set__(instance, value)
 
 
 class AvatarGenerator(object):
@@ -56,12 +79,14 @@ class AvatarGenerator(object):
     squares_quantity_on_axis = SquaresQuantityOnAxisField()
     blur_radius = BlurRadiusField()
     rotate = RotateField()
+    border = BorderField()
 
     def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4),
-                 blur_radius=3, rotate=randint(0, 360)):
+                 blur_radius=3, rotate=randint(0, 360), border='black'):
         self.side_sizes = side_sizes
         self.blur_radius = blur_radius
         self.rotate = rotate
+        self.border = border
         self.squares_quantity_on_axis = squares_quantity_on_axis
         self.distance = self.side_sizes // self.squares_quantity_on_axis
         self.img = Image.new('RGB', (self.side_sizes, self.side_sizes))
@@ -82,6 +107,7 @@ class AvatarGenerator(object):
                         (i + 1) * self.distance,
                         (j + 1) * self.distance
                     ),
+                    outline=self.border or None,
                     fill=self.get_random_color())
 
         self.img = self.img.rotate(self.rotate)
