@@ -23,36 +23,26 @@ Creates a picture that has squares with different colors and rotation.
     
 The AvatarGenerator class takes some arguments:
 
-1. **side_sizes** - required. 
-
-Size of sides for generated squares. The value measured in pixels.
-
+1. **side_sizes** - required. <br/>
+Size of sides for generated squares. <br/>
+The value measured in pixels. <br/>
 Min value is 4.
 
-2. **squares_quantity_on_axis** - optional. 
-
-By default random number from 3 to 4. 
-
-For example if squares_quantity_on_axis value is 4, that total squares on generated picture be 16.
-
+2. **squares_quantity_on_axis** - optional. <br/>
+By default random number from 3 to 4. <br/>
+For example if squares_quantity_on_axis value is 4, that total squares on generated picture be 16.<br/>
 Min value is 1.
 
-3. **blur_radius** - optional.
+3. **blur_radius** - optional. <br/>
+By default 3. <br/>
+Min value is 0.  
 
-By default 3.
-
-Min value is 0.
-
-4. **rotate** - optional.
-
+4. **rotate** - optional.<br/>
 By default random number from 0 to 360.
 
-5. **border** - optional.
-
-By default black color.
-
-Draws squares border. 
-
+5. **border** - optional.<br/>
+By default black color.<br/>
+Draws squares border. <br/>
 Do `border=''` that remove border.
 
 
