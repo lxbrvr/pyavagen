@@ -1,7 +1,6 @@
 from random import randint
 
-from PIL import Image, ImageDraw, ImageFilter
-from PIL import ImageColor
+from PIL import Image, ImageDraw, ImageFilter, ImageColor
 
 
 class Field(object):
