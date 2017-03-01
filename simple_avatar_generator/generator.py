@@ -3,7 +3,44 @@ from random import randint
 from PIL import Image, ImageDraw, ImageFilter, ImageColor
 
 
-class Field(object):
+class MinValueValidator(object):
+
+    def __init__(self, limit_value):
+        self.limit_value = limit_value
+
+    def __call__(self, value, field_name):
+        if value < self.limit_value:
+            raise ValueError(
+                f'{field_name} must not be less {self.limit_value}'
+            )
+
+
+class TypeValidator(object):
+
+    def __init__(self, required_type):
+        self.required_type = required_type
+
+    def __call__(self, value, field_name):
+        if not isinstance(value, self.required_type):
+            raise ValueError(
+                f'{field_name} must be {self.required_type.__name__} type.'
+            )
+
+
+class ColorValidator(object):
+
+    def __call__(self, value, field_name):
+        if value:
+            try:
+                ImageColor.getcolor(value, 'RGB')
+            except Exception as e:
+                raise ValueError(f'{field_name} {e}')
+
+
+class AvatarField(object):
+
+    def __init__(self, validators=None):
+        self.validators = validators
 
     def __set_name__(self, owner, name):
         self.name = name
@@ -11,80 +48,57 @@ class Field(object):
     def __get__(self, instance, owner):
         return instance.__dict__[self.name]
 
-
-class RequiredTypeField(Field):
-    required_type = None
-
-    def __set__(self, instance, value):
-        if not isinstance(value, self.required_type):
-            raise TypeError(
-                f'{self.name}: may be only {self.required_type} type.'
-            )
-
-        instance.__dict__[self.name] = value
-
-
-class MinValueField(Field):
-    min_value = None
-
     def __set__(self, instance, value):
 
-        if value < self.min_value:
-            raise ValueError(
-                f'{self.name}: min is {self.min_value}.'
-            )
-
-        instance.__dict__[self.name] = value
-
-
-class SideSizesField(RequiredTypeField, MinValueField):
-    required_type = int
-    min_value = 4
-
-
-class SquaresQuantityOnAxisField(RequiredTypeField, MinValueField):
-    required_type = int
-    min_value = 1
-
-
-class BlurRadiusField(RequiredTypeField, MinValueField):
-    required_type = int
-    min_value = 0
-
-
-class RotateField(RequiredTypeField):
-    required_type = int
-
-
-class BorderField(RequiredTypeField):
-    required_type = str
-
-    def __set__(self, instance, value):
-        super(BorderField, self).__set__(instance, value)
-
-        if value != '':
-            try:
-                ImageColor.getcolor(value, 'RGB')
-            except Exception as e:
-                raise ValueError(f'{self.name}: {e}')
+        if self.validators:
+            for validator in self.validators:
+                validator(value, self.name)
 
         instance.__dict__[self.name] = value
 
 
 class AvatarGenerator(object):
-    side_sizes = SideSizesField()
-    squares_quantity_on_axis = SquaresQuantityOnAxisField()
-    blur_radius = BlurRadiusField()
-    rotate = RotateField()
-    border = BorderField()
+    side_sizes = AvatarField(
+        validators=[
+            TypeValidator(int),
+            MinValueValidator(4),
+        ]
+    )
+    squares_quantity_on_axis = AvatarField(
+        validators=[
+            TypeValidator(int),
+            MinValueValidator(1),
+        ]
+    )
+    blur_radius = AvatarField(
+        validators=[
+            TypeValidator(int),
+            MinValueValidator(0),
+        ]
+    )
+    rotate = AvatarField(
+        validators=[
+            TypeValidator(int),
+        ]
+    )
+    border = AvatarField(
+        validators=[
+            TypeValidator(str),
+            ColorValidator(),
+        ]
+    )
 
-    def __init__(self, side_sizes, squares_quantity_on_axis=randint(3, 4),
-                 blur_radius=3, rotate=randint(0, 360), border='black'):
+    def __init__(self, side_sizes, squares_quantity_on_axis=None,
+                 blur_radius=2, rotate=None, border='black'):
         self.side_sizes = side_sizes
         self.blur_radius = blur_radius
-        self.rotate = rotate
+        self.rotate = rotate if rotate else randint(0, 360)
         self.border = border
-        self.squares_quantity_on_axis = squares_quantity_on_axis
+        self.squares_quantity_on_axis = (
+            squares_quantity_on_axis if
+            squares_quantity_on_axis else
+            randint(3, 4)
+        )
         self.distance = self.side_sizes // self.squares_quantity_on_axis
         self.img = Image.new('RGB', (self.side_sizes, self.side_sizes))
         self.draw = ImageDraw.Draw(self.img)
