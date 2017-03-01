@@ -1,4 +1,4 @@
-# simple-avatar-generator
+# pyavagen
 
 It is simple avatar generator. It may be useful for example for chats.
 
