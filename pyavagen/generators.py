@@ -193,10 +193,18 @@ class CharAvatar(BaseAvatar):
             ColorValidator(),
         ]
     )
+    font_size = AvatarField(
+        validators=[
+            TypeValidator(int),
+            MinValueValidator(1)
+        ]
+    )
 
-    def __init__(self, string, font=None, background_color=None, *args, **kwargs):
+    def __init__(self, string, font=None, background_color=None,
+                 font_size=None, *args, **kwargs):
         self.background_color = background_color
         super(CharAvatar, self).__init__(*args, **kwargs)
+        self.font_size = font_size if font_size else int(0.6 * self.size)
         self.font = font
         self.string = string
 
@@ -211,7 +219,7 @@ class CharAvatar(BaseAvatar):
     def generate(self):
         draw = ImageDraw.Draw(self.img)
         img_width, img_height = self.img.size
-        font = ImageFont.truetype(font=self.font, size=int(0.75 * self.size))
+        font = ImageFont.truetype(font=self.font, size=self.font_size)
         char = self.string[0].upper()
         char_width, char_height = font.getsize(char)
         char_offset_by_height = font.getoffset(char)[1]
