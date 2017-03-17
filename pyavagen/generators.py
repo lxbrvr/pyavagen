@@ -1,6 +1,7 @@
 import os
 import abc
-from random import randint
+import math
+from random import randint, choice
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
@@ -135,28 +136,33 @@ class SquareAvatar(BaseAvatar):
 
     def generate(self):
         draw = ImageDraw.Draw(self.img)
-        img_size2x = self.size * 2
-        distance = img_size2x // self.squares_quantity_on_axis
+        size2x = self.size * 2
+        square_side_length = size2x // self.squares_quantity_on_axis
 
-        for i in range(img_size2x // distance):
-            for j in range(img_size2x // distance):
+        for i in range(size2x // square_side_length):
+            for j in range(size2x // square_side_length):
                 draw.rectangle(
                     xy=(
-                        i * distance,
-                        j * distance,
-                        (i + 1) * distance,
-                        (j + 1) * distance
+                        i * square_side_length,
+                        j * square_side_length,
+                        (i + 1) * square_side_length,
+                        (j + 1) * square_side_length
                     ),
                     outline=self.square_border,
                     fill=get_random_color())
 
         self.img = self.img.rotate(self.rotate)
-        self.img = self.img.crop((
-            img_size2x / 4,
-            img_size2x / 4,
-            img_size2x - img_size2x / 4,
-            img_size2x - img_size2x / 4
-        ))
+
+        distance_a = math.sqrt(2) * self.size / 2
+        distance_b = size2x - self.size - distance_a
+
+        x0 = choice([distance_a, distance_b])
+        y0 = choice([distance_a, distance_b])
+        x1 = size2x - (size2x - self.size - x0)
+        y1 = size2x - (size2x - self.size - y0)
+
+        self.img = self.img.crop(box=(x0, y0, x1, y1))
+
         self.img = self.img.filter(ImageFilter.GaussianBlur(self.blur_radius))
 
         return self.img
