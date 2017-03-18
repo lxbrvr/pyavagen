@@ -174,6 +174,7 @@ class CharAvatar(BaseAvatar):
     DEFAULT_FONT = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
     )
+    FONT_SIZE_MIN = 1
 
     string = AvatarField(
         validators=[
@@ -196,7 +197,7 @@ class CharAvatar(BaseAvatar):
     font_size = AvatarField(
         validators=[
             TypeValidator(int),
-            MinValueValidator(1)
+            MinValueValidator(FONT_SIZE_MIN)
         ]
     )
 
