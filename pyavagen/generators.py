@@ -53,7 +53,7 @@ class AvatarField(object):
 
 class BaseAvatar(metaclass=abc.ABCMeta):
 
-    SIZE_MIN = 4
+    SIZE_MIN = 1
 
     size = AvatarField(
         validators=[
