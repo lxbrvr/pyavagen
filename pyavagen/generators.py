@@ -59,7 +59,10 @@ class SquareAvatar(BaseAvatar):
 
     """Draws squares with different colors.
 
-    Demo: ../examples/demo1.png, ../examples/demo2.png, ../examples/demo3.png
+    Demo:
+        ../examples/demo1.png,
+        ../examples/demo2.png,
+        ../examples/demo3.png.
 
     Args:
         squares_quantity_on_axis: number of squares on axis. Has a default value.
@@ -154,7 +157,9 @@ class CharAvatar(BaseAvatar):
 
     """Draws a character on background with single color.
 
-    Demo: ../examples/demo4.png, ../examples/demo5.png
+    Demo:
+        ../examples/demo4.png,
+        ../examples/demo5.png.
 
     Args:
         string: string, the first character of which will be used for displaying
@@ -234,8 +239,11 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
 
     """Draws a character on background with squares with different colors.
 
-    Demo: ../examples/demo6.png, ../examples/demo7.png,
-    ../examples/demo8.png, ../examples/demo9.png
+    Demo:
+        ../examples/demo6.png,
+        ../examples/demo7.png,
+        ../examples/demo8.png,
+        ../examples/demo9.png.
 
     """
 
