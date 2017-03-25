@@ -16,6 +16,13 @@ from pyavagen.utils import get_random_color
 
 class BaseAvatar(metaclass=abc.ABCMeta):
 
+    """Abstract class for avatar generators.
+
+    Args:
+        size: output image size.
+
+    """
+
     SIZE_MIN = 1
 
     size = AvatarField(
@@ -49,6 +56,18 @@ class BaseAvatar(metaclass=abc.ABCMeta):
 
 
 class SquareAvatar(BaseAvatar):
+
+    """Draws squares with different colors.
+
+    Demo: ../examples/demo1.png, ../examples/demo2.png, ../examples/demo3.png
+
+    Args:
+        squares_quantity_on_axis: number of squares on axis. Has a default value.
+        blur_radius: blur radius.
+        rotate: background rotate. Has a default value.
+        square_border: border color of squares.
+
+    """
 
     BLUR_RADIUS_MIN = 0
     BLUR_RADIUS_DEFAULT = 1
@@ -133,6 +152,20 @@ class SquareAvatar(BaseAvatar):
 
 class CharAvatar(BaseAvatar):
 
+    """Draws a character on background with single color.
+
+    Demo: ../examples/demo4.png, ../examples/demo5.png
+
+    Args:
+        string: string, the first character of which will be used for displaying
+            on generated image.
+        font: TrueType or OpenType font file. Has default value.
+        background_color: background color. If is None that will be generated
+            random color.
+        font_size: size of font. Has default value.
+
+    """
+
     DEFAULT_BACKGROUND_COLOR = get_random_color
     DEFAULT_FONT = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
@@ -199,6 +232,13 @@ class CharAvatar(BaseAvatar):
 
 class CharSquareAvatar(SquareAvatar, CharAvatar):
 
+    """Draws a character on background with squares with different colors.
+
+    Demo: ../examples/demo6.png, ../examples/demo7.png,
+    ../examples/demo8.png, ../examples/demo9.png
+
+    """
+
     def generate(self):
         self.img = SquareAvatar.generate(self)
         self.img = CharAvatar.generate(self)
@@ -210,8 +250,10 @@ class Avagen(object):
 
     """Factory of avatar classes.
 
-    avatar_class: class that be generates an avatar
-    kwargs: are passed to specified avatar_class
+    Args:
+        avatar_class: a class that generates an avatar.
+        kwargs: keyword arguments are passed to specified avatar_class.
+
     """
 
     SQUARE = SquareAvatar
