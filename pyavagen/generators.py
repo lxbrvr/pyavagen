@@ -11,7 +11,7 @@ from pyavagen.validators import (
     ColorValidator,
     MinValueValidator,
 )
-from pyavagen.utils import get_random_color
+from pyavagen.utils import get_random_hex_color
 
 
 class BaseAvatar(metaclass=abc.ABCMeta):
@@ -134,7 +134,7 @@ class SquareAvatar(BaseAvatar):
                         (j + 1) * square_side_length
                     ),
                     outline=self.square_border,
-                    fill=get_random_color())
+                    fill=get_random_hex_color())
 
         self.img = self.img.rotate(self.rotate)
 
@@ -171,7 +171,7 @@ class CharAvatar(BaseAvatar):
 
     """
 
-    DEFAULT_BACKGROUND_COLOR = get_random_color
+    DEFAULT_BACKGROUND_COLOR = get_random_hex_color
     DEFAULT_FONT = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
     )
