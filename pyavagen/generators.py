@@ -5,50 +5,13 @@ from random import randint, choice
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
+from pyavagen.fields import AvatarField
 from pyavagen.validators import (
     TypeValidator,
     ColorValidator,
     MinValueValidator,
 )
 from pyavagen.utils import get_random_color
-
-
-class AvatarField(object):
-
-    def __init__(self, validators=None, default=None):
-        self.validators = validators
-        self.default = default
-
-    def __set_name__(self, owner, name):
-        self.name = name
-
-    def __get__(self, instance, owner):
-        return instance.__dict__[self.name]
-
-    def __set__(self, instance, value):
-        value = self.get_default() if not value else value
-        self.run_validators(value)
-        instance.__dict__[self.name] = value
-
-    def get_default(self):
-        """
-        Returns the default value for this field.
-        """
-
-        if self.default:
-            if callable(self.default):
-                return self.default()
-            return self.default
-        return None
-
-    def run_validators(self, value):
-        """
-        Runs validators for a passed value.
-        """
-
-        if value and self.validators:
-            for validator in self.validators:
-                validator(value, self.name)
 
 
 class BaseAvatar(metaclass=abc.ABCMeta):
@@ -241,3 +204,31 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
         self.img = CharAvatar.generate(self)
 
         return self.img
+
+
+class Avagen(object):
+
+    """Factory of avatar classes.
+
+    avatar_class: class that be generates an avatar
+    kwargs: are passed to specified avatar_class
+    """
+
+    SQUARE = SquareAvatar
+    CHAR = CharAvatar
+    CHAR_SQUARE = CharSquareAvatar
+
+    AVATAR_CLASSES = (SQUARE, CHAR_SQUARE, CHAR,)
+
+    def __init__(self, avatar_class, **kwargs):
+
+        if avatar_class not in self.AVATAR_CLASSES:
+            raise AttributeError('The passed avatar type not found.')
+
+        self.avatar_class = avatar_class
+        self.kwargs = kwargs
+
+    def generate(self):
+        """Implements calling an generate method in specified avatar_class."""
+
+        return self.avatar_class(**self.kwargs).generate()
