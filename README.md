@@ -35,7 +35,7 @@ Their description is given below.
 
 ## Square avatar
 
-#### Desription
+#### Description
 
 Draws squares with different colors.
 
@@ -66,7 +66,7 @@ Avagen(Avagen.SQUARE, size=500).generate().save('avatar.png')
 
 ## Char avatar
 
-#### Desription
+#### Description
 
 Draws a character on background with single color.
 
@@ -96,7 +96,7 @@ Avagen(Avagen.CHAR, size=500, string="Paul").generate().save('avatar.png')
 
 ## Char square avatar
 
-#### Desription
+#### Description
 
 Draws a character on background with squares with different colors.
 
