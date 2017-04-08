@@ -1,5 +1,16 @@
 class AvatarField(object):
 
+    """Avatar helper.
+
+    Checks and sets a passed value.
+
+    Args:
+        validators: list of validators.
+            A passed value will be sent to every validator. Order is important.
+        default: default value.
+
+    """
+
     def __init__(self, validators=None, default=None):
         self.validators = validators
         self.default = default
@@ -16,9 +27,7 @@ class AvatarField(object):
         instance.__dict__[self.name] = value
 
     def get_default(self):
-        """
-        Returns the default value for this field.
-        """
+        """Returns the default value for this field."""
 
         if self.default:
             if callable(self.default):
@@ -27,9 +36,7 @@ class AvatarField(object):
         return None
 
     def run_validators(self, value):
-        """
-        Runs validators for a passed value.
-        """
+        """Runs validators for a passed value."""
 
         if value and self.validators:
             for validator in self.validators:

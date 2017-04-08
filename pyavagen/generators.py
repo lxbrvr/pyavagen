@@ -63,9 +63,7 @@ class BaseAvatar(metaclass=abc.ABCMeta):
 
     @abc.abstractmethod
     def generate(self):
-        """
-        Generates an image and must returns the PIL.Image.Image object.
-        """
+        """Generates an image and must returns the PIL.Image.Image object."""
 
         pass
 
