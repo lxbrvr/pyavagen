@@ -14,6 +14,21 @@ from pyavagen.validators import (
 from pyavagen.utils import get_random_hex_color
 
 
+COLOR_LIST_FLAT = [
+    '#1abc9c', '#2ecc71', '#3498db', '#9b59b6', '#34495e',
+    '#16a085', '#27ae60', '#2980b9', '#8e44ad', '#2c3e50',
+    '#f1c40f', '#e67e22', '#e74c3c', '#ecf0f1', '#95a5a6',
+    '#f39c12', '#d35400', '#c0392b', '#bdc3c7', '#7f8c8d',
+]
+
+COLOR_LIST_MATERIAL = [
+    '#D32F2F', '#C2185B', '#7B1FA2', '#512DA8', '#303F9F',
+    '#1976D2', '#0288D1', '#0097A7', '#00796B', '#388E3C',
+    '#689F38', '#AFB42B', '#FBC02D', '#FFA000', '#F57C00',
+    '#E64A19', '#5D4037', '#616161', '#455A64', '#333333',
+]
+
+
 class BaseAvatar(metaclass=abc.ABCMeta):
 
     """Abstract class for avatar generators.
@@ -55,7 +70,40 @@ class BaseAvatar(metaclass=abc.ABCMeta):
         pass
 
 
-class SquareAvatar(BaseAvatar):
+class ColorListMixin(object):
+    """Mixin for assignment of color set.
+
+    Args:
+        color_list: list of colors.
+            If it's empty list that will be generates random color.
+
+    """
+
+    COLOR_LIST_DEFAULT = COLOR_LIST_FLAT
+
+    color_list = AvatarField(
+        default=COLOR_LIST_DEFAULT,
+        validators=[
+            TypeValidator((list, tuple)),
+        ]
+    )
+
+    def __init__(self, color_list=None, *args, **kwargs):
+        self.color_list = color_list
+        super(ColorListMixin, self).__init__(*args, **kwargs)
+
+    def get_random_color(self):
+        """
+        Returns random color from self.color_list.
+        If self.color_list passed as an empty list then it will
+        be generate random color.
+        """
+
+        color_list = self.color_list
+        return choice(color_list) if color_list else get_random_hex_color()
+
+
+class SquareAvatar(ColorListMixin, BaseAvatar):
 
     """Draws squares with different colors.
 
@@ -134,7 +182,8 @@ class SquareAvatar(BaseAvatar):
                         (j + 1) * square_side_length
                     ),
                     outline=self.square_border,
-                    fill=get_random_hex_color())
+                    fill=self.get_random_color(),
+                )
 
         self.img = self.img.rotate(self.rotate)
 
@@ -153,7 +202,7 @@ class SquareAvatar(BaseAvatar):
         return self.img
 
 
-class CharAvatar(BaseAvatar):
+class CharAvatar(ColorListMixin, BaseAvatar):
 
     """Draws a character on background with single color.
 
@@ -171,7 +220,6 @@ class CharAvatar(BaseAvatar):
 
     """
 
-    DEFAULT_BACKGROUND_COLOR = get_random_hex_color
     DEFAULT_FONT = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
     )
@@ -189,7 +237,6 @@ class CharAvatar(BaseAvatar):
         ]
     )
     background_color = AvatarField(
-        default=DEFAULT_BACKGROUND_COLOR,
         validators=[
             TypeValidator(str),
             ColorValidator(),
@@ -211,11 +258,15 @@ class CharAvatar(BaseAvatar):
         self.string = string
 
     def get_initial_img(self):
+        b_color = self.background_color
+        b_color = b_color if b_color else self.get_random_color()
+
         img = Image.new(
             mode='RGB',
             size=tuple([self.size]) * 2,
-            color=self.background_color,
+            color=b_color,
         )
+
         return img
 
     def generate(self):
@@ -254,7 +305,7 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
         return self.img
 
 
-class Avagen(object):
+class Avatar(object):
 
     """Factory of avatar classes.
 
