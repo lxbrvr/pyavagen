@@ -160,12 +160,37 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
             squares_quantity_on_axis else
             randint(3, 4)
         )
+        self.squares_colors = []
 
     def get_initial_img(self):
         return Image.new(
             mode='RGB',
             size=tuple([self.size * 2]) * 2,
         )
+
+    def _generate_square_color(self):
+        """
+        Generates colors of squares so that adjacent squares are different.
+        Every color saved to self.squares_colors.
+        After generation returns latest color from self.squares_colors.
+        """
+
+        squares_colors = self.squares_colors
+        squares_colors.append(self.get_random_color())
+
+        if squares_colors and len(squares_colors) > 1:
+            if squares_colors[-1] == squares_colors[-2]:
+                self.squares_colors = squares_colors[:-1]
+                self._generate_square_color()
+
+            if len(squares_colors) > self.squares_quantity_on_axis:
+                upper_square = -(self.squares_quantity_on_axis + 1)
+
+                if squares_colors[-1] == squares_colors[upper_square]:
+                    self.squares_colors = squares_colors[:-1]
+                    self._generate_square_color()
+
+        return self.squares_colors[-1]
 
     def generate(self):
         draw = ImageDraw.Draw(self.img)
@@ -182,7 +207,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
                         (j + 1) * square_side_length
                     ),
                     outline=self.square_border,
-                    fill=self.get_random_color(),
+                    fill=self._generate_square_color(),
                 )
 
         self.img = self.img.rotate(self.rotate)
@@ -335,10 +360,11 @@ class Avatar(object):
         if avatar_class not in self.AVATAR_CLASSES:
             raise AttributeError('The passed avatar type not found.')
 
-        self.avatar_class = avatar_class
+        self.avatar_class = avatar_class(**kwargs)
         self.kwargs = kwargs
 
     def generate(self):
         """Implements calling an generate method in specified avatar_class."""
 
-        return self.avatar_class(**self.kwargs).generate()
+        return self.avatar_class.generate()
+
