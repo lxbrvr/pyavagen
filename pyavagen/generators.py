@@ -1,7 +1,7 @@
 import os
 import abc
 import math
-from random import randint, choice
+import random
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
@@ -100,7 +100,7 @@ class ColorListMixin(object):
         """
 
         color_list = self.color_list
-        return choice(color_list) if color_list else get_random_hex_color()
+        return random.choice(color_list) if color_list else get_random_hex_color()
 
 
 class SquareAvatar(ColorListMixin, BaseAvatar):
@@ -154,11 +154,11 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
         self.blur_radius = blur_radius
         self.square_border = square_border
-        self.rotate = rotate if rotate else randint(0, 360)
+        self.rotate = rotate if rotate else random.randint(0, 360)
         self.squares_quantity_on_axis = (
             squares_quantity_on_axis if
             squares_quantity_on_axis else
-            randint(3, 4)
+            random.randint(3, 4)
         )
         self.squares_colors = []
 
@@ -214,9 +214,8 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
         distance_a = math.sqrt(2) * self.size / 2
         distance_b = size2x - self.size - distance_a
-
-        x0 = choice([distance_a, distance_b])
-        y0 = choice([distance_a, distance_b])
+        x0 = random.uniform(distance_a, distance_b)
+        y0 = random.uniform(distance_a, distance_b)
         x1 = size2x - (size2x - self.size - x0)
         y1 = size2x - (size2x - self.size - y0)
 
