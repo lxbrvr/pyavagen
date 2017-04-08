@@ -223,6 +223,7 @@ class CharAvatar(ColorListMixin, BaseAvatar):
     DEFAULT_FONT = os.path.join(
         os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
     )
+    FONT_COLOR_DEFAULT = 'white'
     FONT_SIZE_MIN = 1
 
     string = AvatarField(
@@ -242,6 +243,13 @@ class CharAvatar(ColorListMixin, BaseAvatar):
             ColorValidator(),
         ]
     )
+    font_color = AvatarField(
+        default=FONT_COLOR_DEFAULT,
+        validators=[
+            TypeValidator(str),
+            ColorValidator(),
+        ]
+    )
     font_size = AvatarField(
         validators=[
             TypeValidator(int),
@@ -249,12 +257,13 @@ class CharAvatar(ColorListMixin, BaseAvatar):
         ]
     )
 
-    def __init__(self, string, font=None, background_color=None,
-                 font_size=None, *args, **kwargs):
+    def __init__(self, string, font=None, font_color=None,
+                 background_color=None, font_size=None, *args, **kwargs):
         self.background_color = background_color
         super(CharAvatar, self).__init__(*args, **kwargs)
         self.font_size = font_size if font_size else int(0.6 * self.size)
         self.font = font
+        self.font_color = font_color
         self.string = string
 
     def get_initial_img(self):
@@ -281,7 +290,7 @@ class CharAvatar(ColorListMixin, BaseAvatar):
             (img_width - char_width) / 2,
             ((img_height - char_height) / 2) - char_offset_by_height / 2
         )
-        draw.text(xy=char_position, text=char, font=font)
+        draw.text(xy=char_position, text=char, font=font, fill=self.font_color)
 
         return self.img
 
