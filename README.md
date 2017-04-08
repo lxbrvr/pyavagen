@@ -17,7 +17,10 @@ Generation different type avatars with possibility customization.
 For avatar generation using the `Avagen` class.
 
 ```python
-from pyavagen import Avagen  
+import pyavagen
+
+
+pyavagen.Avatar(avatar_class, **kwargs)
 ```
     
 #### Arguments   
@@ -25,9 +28,9 @@ from pyavagen import Avagen
 - `avatar_class` - avatar class that will be generates an image.
 
 Classes:
-1. Avagen.SQUARE
-2. Avagen.CHAR
-3. Avagen.CHAR_SQUARE
+1. pyavagen.Avatar.SQUARE
+2. pyavagen.Avatar.CHAR
+3. pyavagen.Avatar.CHAR_SQUARE
 
 Their description is given below.
 
@@ -49,19 +52,22 @@ Draws squares with different colors.
 
 ```python
 
-from pyavagen import Avagen
+import pyavagen
 
 
-Avagen(Avagen.SQUARE, size=500).generate().save('avatar.png') 
+pyavagen.Avatar(pyavagen.Avagen.SQUARE, size=500).generate().save('avatar.png') 
 ```
 
 #### Arguments
 
 - `size` - size of output image. The integer type. 
-- `squares_quantity_on_axis` - number of squares on axis. The integer type. Has a default value. 
-- `blur_radius` - blur radius. The integer type.
-- `rotate` - image rotate. The integer type. Has a default value.
+- `squares_quantity_on_axis` - number of squares on axis. The integer type. Default random value from 3 to 4. 
+- `blur_radius` - blur radius. Used `PIL.ImageFilter.GaussianBlur`.The integer type. Default 1.
+- `rotate` - image rotate. The integer type. Default random rotation.
 - `square_border` - border color of squares. The string type.
+- `color_list` - list of colors from which will be generating colors for squares. <br/>
+ By default a set of flat colors (`pyavagen.COLOR_LIST_FLAT`). If `color_list` passed as an empty list then will be generation a random color. There is also list of colors in material style - `pyavagen.COLOR_LIST_MATERIAL`.
+
 
 
 ## Char avatar
@@ -79,19 +85,21 @@ Draws a character on background with single color.
 
 ```python
 
-from pyavagen import Avagen
+import pyavagen
 
 
-Avagen(Avagen.CHAR, size=500, string="Paul").generate().save('avatar.png') 
+pyavagen.Avatar(pyavagen.Avatar.CHAR, size=500, string="Paul").generate().save('avatar.png') 
 ```
 
 #### Arguments
 
 - `size` - size of output image. The integer type.
 - `string` - string, the first character of which will be used for displaying on generated image. The string type.
-- `font` - TrueType or OpenType font file. Path to font file. Has default value.
-- `background_color` - background color. If is None that will be generated a random color.
+- `font` - TrueType or OpenType font file. Path to font file. Default Comfortaa-Regular.
+- `background_color` - background color. If not passed that a will be a random color from `color_list`.
 - `font_size` - size of font. The integer type. Has default value.
+- `font_color` - color of font. The string type. Default white.
+- `color_list` - list of colors from which will be generating colors for background. Default `pyavagen.COLOR_LIST_FLAT`.
 
 
 ## Char square avatar
@@ -111,10 +119,10 @@ Draws a character on background with squares with different colors.
 
 ```python
 
-from pyavagen import Avagen
+import pyavagen
 
 
-Avagen(Avagen.CHAR_SQUARE, size=500, string="Jack").generate().save('avatar.png') 
+pyavagen.Avatar(pyavagen.Avatar.CHAR_SQUARE, size=500, string="Jack").generate().save('avatar.png') 
 ```
 
 #### Arguments
