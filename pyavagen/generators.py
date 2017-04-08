@@ -184,9 +184,9 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
                 self._generate_square_color()
 
             if len(squares_colors) > self.squares_quantity_on_axis:
-                upper_square = -(self.squares_quantity_on_axis + 1)
+                upper_adjacent_square = -(self.squares_quantity_on_axis + 1)
 
-                if squares_colors[-1] == squares_colors[upper_square]:
+                if squares_colors[-1] == squares_colors[upper_adjacent_square]:
                     self.squares_colors = squares_colors[:-1]
                     self._generate_square_color()
 
