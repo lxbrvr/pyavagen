@@ -350,33 +350,3 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
 
         return self.img
 
-
-class Avatar(object):
-
-    """Factory of avatar classes.
-
-    Args:
-        avatar_class: a class that generates an avatar.
-        kwargs: keyword arguments are passed to specified avatar_class.
-
-    """
-
-    SQUARE = SquareAvatar
-    CHAR = CharAvatar
-    CHAR_SQUARE = CharSquareAvatar
-
-    AVATAR_CLASSES = (SQUARE, CHAR_SQUARE, CHAR,)
-
-    def __init__(self, avatar_class, **kwargs):
-
-        if avatar_class not in self.AVATAR_CLASSES:
-            raise AttributeError('The passed avatar type not found.')
-
-        self.avatar_class = avatar_class(**kwargs)
-        self.kwargs = kwargs
-
-    def generate(self):
-        """Implements calling an generate method in specified avatar_class."""
-
-        return self.avatar_class.generate()
-

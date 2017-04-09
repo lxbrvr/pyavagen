@@ -20,19 +20,19 @@ For avatar generation using the `Avagen` class.
 import pyavagen
 
 
-pyavagen.Avatar(avatar_class, **kwargs)
+pyavagen.Avatar(avatar_type, **kwargs)
 ```
     
 #### Arguments   
 
-- `avatar_class` - avatar class that will be generates an image.
+- `avatar_type` - avatar type that will be generates an image.
 
-Classes:
-1. pyavagen.Avatar.SQUARE
-2. pyavagen.Avatar.CHAR
-3. pyavagen.Avatar.CHAR_SQUARE
+Types:
+1. `pyavagen.SQUARE_AVATAR` or `'square'` 
+2. `pyavagen.CHAR_AVATAR` or `'char'`
+3. `pyavagen.CHAR_SQUARE_AVATAR` or `'char_square'`
 
-Their description is given below.
+Avatar types description is given below.
 
 - `kwargs` - keyword arguments that are passed to specified avatar_class.
 
@@ -56,7 +56,8 @@ Draws squares with different colors.
 import pyavagen
 
 
-pyavagen.Avatar(pyavagen.Avagen.SQUARE, size=500).generate().save('avatar.png') 
+avatar = pyavagen.Avatar(pyavagen.SQUARE_AVATAR, size=500)
+avatar.generate().save('avatar.png')
 ```
 
 #### Arguments
@@ -91,7 +92,8 @@ Draws a character on background with single color.
 import pyavagen
 
 
-pyavagen.Avatar(pyavagen.Avatar.CHAR, size=500, string="Paul").generate().save('avatar.png') 
+avatar = pyavagen.Avatar(pyavagen.CHAR_AVATAR, size=500, string="Paul")
+avatar.generate().save('avatar.png') 
 ```
 
 #### Arguments
@@ -125,7 +127,8 @@ Draws a character on background with squares with different colors.
 import pyavagen
 
 
-pyavagen.Avatar(pyavagen.Avatar.CHAR_SQUARE, size=500, string="Jack").generate().save('avatar.png') 
+avatar = pyavagen.Avatar(pyavagen.CHAR_SQUARE_AVATAR, size=500, string="Jack")
+avatar.generate().save('avatar.png') 
 ```
 
 #### Arguments
