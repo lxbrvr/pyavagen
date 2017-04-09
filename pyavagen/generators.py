@@ -121,6 +121,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
     BORDER_COLOR_DEFAULT = 'black'
     BORDER_SIZE_DEFAULT = 0
+    BORDER_SIZE_MIN = 0
     BLUR_RADIUS_MIN = 0
     BLUR_RADIUS_DEFAULT = 1
 
@@ -153,6 +154,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         default=BORDER_SIZE_DEFAULT,
         validators=[
             TypeValidator(int),
+            MinValueValidator(0)
         ]
     )
 
