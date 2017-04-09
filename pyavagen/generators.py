@@ -114,10 +114,13 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         squares_quantity_on_axis: number of squares on axis. Has a default value.
         blur_radius: blur radius.
         rotate: background rotate. Has a default value.
-        square_border: border color of squares.
+        border_size: border size of square.
+        border_color: color of border.
 
     """
 
+    BORDER_COLOR_DEFAULT = 'black'
+    BORDER_SIZE_DEFAULT = 0
     BLUR_RADIUS_MIN = 0
     BLUR_RADIUS_DEFAULT = 1
 
@@ -139,19 +142,28 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
             TypeValidator(int),
         ]
     )
-    square_border = AvatarField(
+    border_color = AvatarField(
+        default=BORDER_COLOR_DEFAULT,
         validators=[
             TypeValidator(str),
             ColorValidator(),
         ]
     )
+    border_size = AvatarField(
+        default=BORDER_SIZE_DEFAULT,
+        validators=[
+            TypeValidator(int),
+        ]
+    )
 
     def __init__(self, squares_quantity_on_axis=None, blur_radius=None,
-                 rotate=None, square_border=None, *args, **kwargs):
+                 rotate=None, border_size=None,
+                 border_color=None, *args, **kwargs):
+        self.border_color = border_color
         super(SquareAvatar, self).__init__(*args, **kwargs)
 
         self.blur_radius = blur_radius
-        self.square_border = square_border
+        self.border_size = border_size
         self.rotate = rotate if rotate else random.randint(0, 360)
         self.squares_quantity_on_axis = (
             squares_quantity_on_axis if
@@ -163,6 +175,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
     def get_initial_img(self):
         return Image.new(
             mode='RGB',
+            color=self.border_color,
             size=tuple([self.size * 2]) * 2,
         )
 
@@ -199,12 +212,11 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
             for j in range(size2x // square_side_length):
                 draw.rectangle(
                     xy=(
-                        i * square_side_length,
-                        j * square_side_length,
-                        (i + 1) * square_side_length,
-                        (j + 1) * square_side_length
+                        i * square_side_length + self.border_size,
+                        j * square_side_length + self.border_size,
+                        (i + 1) * square_side_length - self.border_size,
+                        (j + 1) * square_side_length - self.border_size,
                     ),
-                    outline=self.square_border,
                     fill=self._generate_square_color(),
                 )
 

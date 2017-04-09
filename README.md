@@ -47,6 +47,7 @@ Draws squares with different colors.
 ![Demo 1](examples/Demo1.png?raw=true "Demo 1")
 ![Demo 2](examples/Demo2.png?raw=true "Demo 2")
 ![Demo 3](examples/Demo3.png?raw=true "Demo 3")
+![Demo 11](examples/Demo11.png?raw=true "Demo 11")
 
 #### Usage
 
@@ -64,7 +65,8 @@ pyavagen.Avatar(pyavagen.Avagen.SQUARE, size=500).generate().save('avatar.png')
 - `squares_quantity_on_axis` - number of squares on axis. The integer type. Default random value from 3 to 4. 
 - `blur_radius` - blur radius. Used `PIL.ImageFilter.GaussianBlur`.The integer type. Default 1.
 - `rotate` - image rotate. The integer type. Default random rotation.
-- `square_border` - border color of squares. The string type.
+- `border_size` - border size of square. The integer type. Default 0.
+- `border_color` - border color of squares. The string type. Default black.
 - `color_list` - list of colors from which will be generating colors for squares. <br/>
  By default a set of flat colors (`pyavagen.COLOR_LIST_FLAT`). If `color_list` passed as an empty list then will be generation a random color. There is also list of colors in material style - `pyavagen.COLOR_LIST_MATERIAL`.
 

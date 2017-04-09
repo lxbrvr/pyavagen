@@ -29,7 +29,7 @@ class AvatarField(object):
     def get_default(self):
         """Returns the default value for this field."""
 
-        if self.default:
+        if self.default is not None:
             if callable(self.default):
                 return self.default()
             return self.default
