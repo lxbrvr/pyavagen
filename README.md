@@ -84,6 +84,7 @@ Draws a character on background with single color.
 ![Demo 4](examples/Demo4.png?raw=true "Demo 4")
 ![Demo 5](examples/Demo5.png?raw=true "Demo 5")
 ![Demo 10](examples/Demo10.png?raw=true "Demo 10")
+![Demo 12](examples/Demo12.png?raw=true "Demo 12")
 
 #### Usage
 

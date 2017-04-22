@@ -246,6 +246,7 @@ class CharAvatar(ColorListMixin, BaseAvatar):
         ../examples/demo4.png,
         ../examples/demo5.png.
         ../examples/demo10.png.
+        ../examples/demo12.png.
 
     Args:
         string: string, the first character of which will be used for displaying
