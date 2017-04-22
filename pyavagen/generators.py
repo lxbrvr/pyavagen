@@ -254,14 +254,17 @@ class CharAvatar(ColorListMixin, BaseAvatar):
         background_color: background color. If is None that will be generated
             random color.
         font_size: size of font. Has default value.
+        font_outline: draw outline to chars or not.
 
     """
 
     DEFAULT_FONT = os.path.join(
-        os.path.abspath(os.path.dirname(__file__)), 'fonts/Comfortaa-Regular.ttf'
+        os.path.abspath(os.path.dirname(__file__)),
+        'fonts/Comfortaa-Regular.ttf'
     )
     FONT_COLOR_DEFAULT = 'white'
     FONT_SIZE_MIN = 1
+    FONT_OUTLINE_DEFAULT = False
 
     string = AvatarField(
         validators=[
@@ -293,14 +296,21 @@ class CharAvatar(ColorListMixin, BaseAvatar):
             MinValueValidator(FONT_SIZE_MIN)
         ]
     )
+    font_outline = AvatarField(
+        default=FONT_OUTLINE_DEFAULT,
+        validators=[
+            TypeValidator(bool),
+        ]
+    )
 
-    def __init__(self, string, font=None, font_color=None,
+    def __init__(self, string, font=None, font_color=None, font_outline=None,
                  background_color=None, font_size=None, *args, **kwargs):
         self.background_color = background_color
         super(CharAvatar, self).__init__(*args, **kwargs)
         self.font_size = font_size if font_size else int(0.6 * self.size)
         self.font = font
         self.font_color = font_color
+        self.font_outline = font_outline
         self.string = string
 
     def get_initial_img(self):
@@ -323,11 +333,16 @@ class CharAvatar(ColorListMixin, BaseAvatar):
         char_width, char_height = font.getsize(char)
         char_offset_by_height = font.getoffset(char)[1]
 
-        char_position = (
+        x, y = (
             (img_width - char_width) / 2,
             ((img_height - char_height) / 2) - char_offset_by_height / 2
         )
-        draw.text(xy=char_position, text=char, font=font, fill=self.font_color)
+
+        if self.font_outline:
+            for xy_offset in [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]:
+                draw.text(xy=xy_offset, text=char, font=font, fill='black')
+
+        draw.text(xy=(x, y), text=char, font=font, fill=self.font_color)
 
         return self.img
 

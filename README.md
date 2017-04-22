@@ -104,6 +104,7 @@ avatar.generate().save('avatar.png')
 - `background_color` - background color. If not passed that a will be a random color from `color_list`.
 - `font_size` - size of font. The integer type. Has default value.
 - `font_color` - color of font. The string type. Default white.
+- `font_outline` - Outline of character. Default false.
 - `color_list` - list of colors from which will be generating colors for background. Default `pyavagen.COLOR_LIST_FLAT`.
 
 
