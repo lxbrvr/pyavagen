@@ -1,3 +1,7 @@
 .idea
 __pycache__/
 *.py[cod]
+.cache/
+.tox/
+env/
+*.egg-info

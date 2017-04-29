@@ -20,8 +20,13 @@ class TypeValidator(object):
 
     def __call__(self, value, field_name):
         if not isinstance(value, self.required_type):
+            if isinstance(self.required_type, list):
+                types = ", ".join([r.__name__ for r in self.required_type])
+            else:
+                types = self.required_type
+
             raise ValueError(
-                f'{field_name} must be {self.required_type.__name__} type.'
+                f'{field_name} must be {types} type.'
             )
 
 

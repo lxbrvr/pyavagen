@@ -136,3 +136,8 @@ avatar.generate().save('avatar.png')
 #### Arguments
 
 The same arguments as for Square avatar and Char avatar.
+
+
+# Testing
+
+Execute `tox` from the project root.

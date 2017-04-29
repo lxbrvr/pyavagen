@@ -15,9 +15,6 @@ __all__ = [
     'COLOR_LIST_FLAT',
 ]
 
-__version__ = '0.1.0'
-
-
 SQUARE_AVATAR = 'square'
 CHAR_AVATAR = 'char'
 CHAR_SQUARE_AVATAR = 'char_square'
