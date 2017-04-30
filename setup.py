@@ -18,7 +18,9 @@ setup(
     install_requires=[
         'Pillow',
     ],
-    packages=find_packages(),
+    packages=[
+        'pyavagen',
+    ],
     include_package_data=True,
     keywords=['image', 'avatar'],
     classifiers=[
