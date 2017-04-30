@@ -28,8 +28,9 @@ setup(
     include_package_data=True,
     keywords=['image', 'avatar'],
     classifiers=[
-        'Programming Language :: Python :: 3.6',
         'Development Status :: 4 - Beta',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.6',
         'Intended Audience :: Developers',
         'License :: OSI Approved :: MIT License',
         "Topic :: Multimedia :: Graphics",
