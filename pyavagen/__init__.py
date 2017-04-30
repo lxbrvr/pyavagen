@@ -1,3 +1,4 @@
+from pyavagen.version import *
 from pyavagen.generators import (
     COLOR_LIST_FLAT,
     COLOR_LIST_MATERIAL,

@@ -2,11 +2,15 @@ import os
 from setuptools import setup, find_packages
 
 
+def get_version():
+    with open("pyavagen/version.py", "rt") as f:
+        return f.readline().split("=")[1].strip(' "\n')
+
 cur_dir = os.path.abspath(os.path.dirname(__file__))
 
 setup(
     name='pyavagen',
-    version='0.1.0',
+    version=get_version(),
     author='Alexander Abrosimov',
     author_email='to100100100@gmail.com',
     url='https://github.com/abalx/pyavagen',
