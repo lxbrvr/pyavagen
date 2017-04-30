@@ -15,13 +15,6 @@ Generation different type avatars with possibility customization.
 # Avatar types
 
 For avatar generation using the `Avagen` class.
-
-```python
-import pyavagen
-
-
-pyavagen.Avatar(avatar_type, **kwargs)
-```
     
 #### Arguments   
 
