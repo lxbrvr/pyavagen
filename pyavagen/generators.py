@@ -111,7 +111,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         ../examples/demo3.png.
 
     Args:
-        squares_quantity_on_axis: number of squares on axis. Has a default value.
+        squares_on_axis: number of squares on axis. Has a default value.
         blur_radius: blur radius.
         rotate: background rotate. Has a default value.
         border_size: border size of square.
@@ -125,7 +125,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
     BLUR_RADIUS_MIN = 0
     BLUR_RADIUS_DEFAULT = 1
 
-    squares_quantity_on_axis = AvatarField(
+    squares_on_axis = AvatarField(
         validators=[
             TypeValidator(int),
             MinValueValidator(1),
@@ -158,7 +158,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         ]
     )
 
-    def __init__(self, squares_quantity_on_axis=None, blur_radius=None,
+    def __init__(self, squares_on_axis=None, blur_radius=None,
                  rotate=None, border_size=None,
                  border_color=None, *args, **kwargs):
         self.border_color = border_color
@@ -167,9 +167,9 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         self.blur_radius = blur_radius
         self.border_size = border_size
         self.rotate = rotate if rotate else random.randint(0, 360)
-        self.squares_quantity_on_axis = (
-            squares_quantity_on_axis if
-            squares_quantity_on_axis else
+        self.squares_on_axis = (
+            squares_on_axis if
+            squares_on_axis else
             random.randint(3, 4)
         )
         self.squares_colors = []
@@ -196,8 +196,8 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
                 self.squares_colors = squares_colors[:-1]
                 self._generate_square_color()
 
-            if len(squares_colors) > self.squares_quantity_on_axis:
-                upper_adjacent_square = -(self.squares_quantity_on_axis + 1)
+            if len(squares_colors) > self.squares_on_axis:
+                upper_adjacent_square = -(self.squares_on_axis + 1)
 
                 if squares_colors[-1] == squares_colors[upper_adjacent_square]:
                     self.squares_colors = squares_colors[:-1]
@@ -208,7 +208,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
     def generate(self):
         draw = ImageDraw.Draw(self.img)
         size2x = self.size * 2
-        square_side_length = size2x // self.squares_quantity_on_axis
+        square_side_length = size2x // self.squares_on_axis
 
         for i in range(size2x // square_side_length):
             for j in range(size2x // square_side_length):

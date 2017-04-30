@@ -63,7 +63,7 @@ avatar.generate().save('avatar.png')
 #### Arguments
 
 - `size` - size of output image. The integer type. 
-- `squares_quantity_on_axis` - number of squares on axis. The integer type. Default random value from 3 to 4. 
+- `squares_on_axis` - number of squares on axis. The integer type. Default random value from 3 to 4. 
 - `blur_radius` - blur radius. Used `PIL.ImageFilter.GaussianBlur`.The integer type. Default 1.
 - `rotate` - image rotate. The integer type. Default random rotation.
 - `border_size` - border size of square. The integer type. Default 0.
