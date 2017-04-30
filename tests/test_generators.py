@@ -78,3 +78,52 @@ class TestColorListMixin:
 
         assert color_validator is None
 
+
+class TestSquareAvatar:
+    def test_generate_with_full_set(self):
+        avatar = generators.SquareAvatar(
+            size=4,
+            border_color='black',
+            blur_radius=2,
+            border_size=2,
+            rotate=2,
+            squares_on_axis=2,
+            color_list=pyavagen.COLOR_LIST_MATERIAL,
+        )
+
+        assert isinstance(avatar.generate(), Image.Image)
+
+
+class TestCharAvatar:
+    def test_generate_with_full_set(self):
+        avatar = generators.CharAvatar(
+            size=4,
+            background_color='black',
+            font_size=2,
+            font_color='black',
+            font_outline=True,
+            color_list=pyavagen.COLOR_LIST_MATERIAL,
+            string='string',
+        )
+
+        assert isinstance(avatar.generate(), Image.Image)
+
+
+class TestCharSquareAvatar:
+    def test_generate_with_full_set(self):
+        avatar = generators.CharSquareAvatar(
+            size=4,
+            background_color='black',
+            font_size=2,
+            font_color='black',
+            font_outline=True,
+            color_list=pyavagen.COLOR_LIST_MATERIAL,
+            string='string',
+            border_color='black',
+            blur_radius=2,
+            border_size=2,
+            rotate=2,
+            squares_on_axis=2,
+        )
+
+        assert isinstance(avatar.generate(), Image.Image)

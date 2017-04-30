@@ -172,7 +172,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
             squares_on_axis else
             random.randint(3, 4)
         )
-        self.squares_colors = []
+        self._squares_colors = []
 
     def get_initial_img(self):
         return Image.new(
@@ -188,22 +188,22 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         After generation returns latest color from self.squares_colors.
         """
 
-        squares_colors = self.squares_colors
+        squares_colors = self._squares_colors
         squares_colors.append(self.get_random_color())
 
         if squares_colors and len(squares_colors) > 1:
             if squares_colors[-1] == squares_colors[-2]:
-                self.squares_colors = squares_colors[:-1]
+                self._squares_colors = squares_colors[:-1]
                 self._generate_square_color()
 
             if len(squares_colors) > self.squares_on_axis:
                 upper_adjacent_square = -(self.squares_on_axis + 1)
 
                 if squares_colors[-1] == squares_colors[upper_adjacent_square]:
-                    self.squares_colors = squares_colors[:-1]
+                    self._squares_colors = squares_colors[:-1]
                     self._generate_square_color()
 
-        return self.squares_colors[-1]
+        return self._squares_colors[-1]
 
     def generate(self):
         draw = ImageDraw.Draw(self.img)
