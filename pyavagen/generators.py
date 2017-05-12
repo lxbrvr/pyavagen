@@ -166,7 +166,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
         self.blur_radius = blur_radius
         self.border_size = border_size
-        self.rotate = rotate if rotate else random.randint(0, 360)
+        self.rotate = rotate if rotate is not None else random.randint(0, 360)
         self.squares_on_axis = (
             squares_on_axis if
             squares_on_axis else
