@@ -80,8 +80,9 @@ class TestColorListMixin:
 
 
 class TestSquareAvatar:
-    def test_generate_with_full_set(self):
-        avatar = generators.SquareAvatar(
+    @pytest.fixture(scope="module")
+    def avatar_data(self):
+        return dict(
             size=4,
             border_color='black',
             blur_radius=2,
@@ -91,12 +92,27 @@ class TestSquareAvatar:
             color_list=pyavagen.COLOR_LIST_MATERIAL,
         )
 
-        assert isinstance(avatar.generate(), Image.Image)
+    @pytest.fixture(scope="module")
+    def avatar_object(self, avatar_data):
+        return generators.SquareAvatar(**avatar_data)
+
+    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+        assert avatar_object.size == avatar_data['size']
+        assert avatar_object.color_list == avatar_data['color_list']
+        assert avatar_object.border_color == avatar_data['border_color']
+        assert avatar_object.border_size == avatar_data['border_size']
+        assert avatar_object.blur_radius == avatar_data['blur_radius']
+        assert avatar_object.rotate == avatar_data['rotate']
+        assert avatar_object.squares_on_axis == avatar_data['squares_on_axis']
+
+    def test_generate_with_full_set(self, avatar_object):
+        assert isinstance(avatar_object.generate(), Image.Image)
 
 
 class TestCharAvatar:
-    def test_generate_with_full_set(self):
-        avatar = generators.CharAvatar(
+    @pytest.fixture(scope="module")
+    def avatar_data(self):
+        return dict(
             size=4,
             background_color='black',
             font_size=2,
@@ -106,12 +122,27 @@ class TestCharAvatar:
             string='string',
         )
 
-        assert isinstance(avatar.generate(), Image.Image)
+    @pytest.fixture(scope="module")
+    def avatar_object(self, avatar_data):
+        return generators.CharAvatar(**avatar_data)
+
+    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+        assert avatar_object.size == avatar_data['size']
+        assert avatar_object.background_color == avatar_data['background_color']
+        assert avatar_object.font_color == avatar_data['font_color']
+        assert avatar_object.font_size == avatar_data['font_size']
+        assert avatar_object.font_outline == avatar_data['font_outline']
+        assert avatar_object.color_list == avatar_data['color_list']
+        assert avatar_object.string == avatar_data['string']
+
+    def test_generate_with_full_set(self, avatar_object):
+        assert isinstance(avatar_object.generate(), Image.Image)
 
 
 class TestCharSquareAvatar:
-    def test_generate_with_full_set(self):
-        avatar = generators.CharSquareAvatar(
+    @pytest.fixture(scope="module")
+    def avatar_data(self):
+        return dict(
             size=4,
             background_color='black',
             font_size=2,
@@ -126,4 +157,23 @@ class TestCharSquareAvatar:
             squares_on_axis=2,
         )
 
-        assert isinstance(avatar.generate(), Image.Image)
+    @pytest.fixture(scope="module")
+    def avatar_object(self, avatar_data):
+        return generators.CharSquareAvatar(**avatar_data)
+
+    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+        assert avatar_object.size == avatar_data['size']
+        assert avatar_object.background_color == avatar_data['background_color']
+        assert avatar_object.font_color == avatar_data['font_color']
+        assert avatar_object.font_size == avatar_data['font_size']
+        assert avatar_object.font_outline == avatar_data['font_outline']
+        assert avatar_object.color_list == avatar_data['color_list']
+        assert avatar_object.string == avatar_data['string']
+        assert avatar_object.border_color == avatar_data['border_color']
+        assert avatar_object.border_size == avatar_data['border_size']
+        assert avatar_object.blur_radius == avatar_data['blur_radius']
+        assert avatar_object.rotate == avatar_data['rotate']
+        assert avatar_object.squares_on_axis == avatar_data['squares_on_axis']
+
+    def test_generate_with_full_set(self, avatar_object):
+        assert isinstance(avatar_object.generate(), Image.Image)
