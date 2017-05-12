@@ -126,6 +126,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
     BLUR_RADIUS_DEFAULT = 1
 
     squares_on_axis = AvatarField(
+        default=lambda: random.randint(3, 4),
         validators=[
             TypeValidator(int),
             MinValueValidator(1),
@@ -139,6 +140,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
         ]
     )
     rotate = AvatarField(
+        default=lambda: random.randint(0, 360),
         validators=[
             TypeValidator(int),
         ]
@@ -166,12 +168,8 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
         self.blur_radius = blur_radius
         self.border_size = border_size
-        self.rotate = rotate if rotate is not None else random.randint(0, 360)
-        self.squares_on_axis = (
-            squares_on_axis if
-            squares_on_axis else
-            random.randint(3, 4)
-        )
+        self.rotate = rotate
+        self.squares_on_axis = squares_on_axis
         self._squares_colors = []
 
     def get_initial_img(self):
