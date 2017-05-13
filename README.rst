@@ -128,15 +128,15 @@ Testing
 
 Execute ``tox`` from the project root.
 
-.. |Demo 1| image:: examples/Demo1.png?raw=true
-.. |Demo 2| image:: examples/Demo2.png?raw=true
-.. |Demo 3| image:: examples/Demo3.png?raw=true
-.. |Demo 11| image:: examples/Demo11.png?raw=true
-.. |Demo 4| image:: examples/Demo4.png?raw=true
-.. |Demo 5| image:: examples/Demo5.png?raw=true
-.. |Demo 10| image:: examples/Demo10.png?raw=true
-.. |Demo 12| image:: examples/Demo12.png?raw=true
-.. |Demo 6| image:: examples/Demo6.png?raw=true
-.. |Demo 7| image:: examples/Demo7.png?raw=true
-.. |Demo 8| image:: examples/Demo8.png?raw=true
-.. |Demo 9| image:: examples/Demo9.png?raw=true
+.. |Demo 1| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo1.png?raw=true
+.. |Demo 2| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo2.png?raw=true
+.. |Demo 3| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo3.png?raw=true
+.. |Demo 11| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo11.png?raw=true
+.. |Demo 4| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo4.png?raw=true
+.. |Demo 5| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo5.png?raw=true
+.. |Demo 10| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo10.png?raw=true
+.. |Demo 12| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo12.png?raw=true
+.. |Demo 6| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo6.png?raw=true
+.. |Demo 7| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo7.png?raw=true
+.. |Demo 8| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo8.png?raw=true
+.. |Demo 9| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo9.png?raw=true
