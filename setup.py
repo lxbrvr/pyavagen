@@ -15,7 +15,7 @@ setup(
     author_email='to100100100@gmail.com',
     url='https://github.com/abalx/pyavagen',
     description='Avatars generation of different types',
-    long_description=open(os.path.join(cur_dir, 'README.md')).read(),
+    long_description=open(os.path.join(cur_dir, 'README.rst')).read(),
     license='MIT',
     requires=['python (>= 3.6)',],
     tests_require=['pytest'],
