@@ -182,8 +182,8 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
     def _generate_square_color(self):
         """
         Generates colors of squares so that adjacent squares are different.
-        Every color saved to self.squares_colors.
-        After generation returns latest color from self.squares_colors.
+        Every color saved to self._squares_colors.
+        After generation returns latest color from self._squares_colors.
         """
 
         squares_colors = self._squares_colors
