@@ -138,6 +138,18 @@ class TestCharAvatar:
     def test_generate_with_full_set(self, avatar_object):
         assert isinstance(avatar_object.generate(), Image.Image)
 
+    def test_get_text_for_draw_with_one_word(self, avatar_object):
+        avatar_object.string = 'One'
+        assert avatar_object.get_text_for_draw() == 'O'
+
+    def test_get_text_for_draw_with_two_words(self, avatar_object):
+        avatar_object.string = 'One two'
+        assert avatar_object.get_text_for_draw() == 'OT'
+
+    def test_get_text_for_draw_with_multiple_words(self, avatar_object):
+        avatar_object.string = 'One two free'
+        assert avatar_object.get_text_for_draw() == 'OT'
+
 
 class TestCharSquareAvatar:
     @pytest.fixture(scope="module")
