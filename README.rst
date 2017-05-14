@@ -89,8 +89,10 @@ Draws a character on background with single color.
 **Arguments:**
 
 -  ``size`` - size of output image. The integer type.
--  ``string`` - string, the first character of which will be used for
-   displaying on generated image. The string type.
+-  ``string`` - first chars of two first words that separated whitespaces.
+   For example from string 'John Paul' draws "JP".
+   If passed an one word then draws a first char of this word.
+   For example from string 'John' draws "J". The string type.
 -  ``font`` - TrueType or OpenType font file. Path to font file. Default
    Comfortaa-Regular.
 -  ``background_color`` - background color. If not passed that a will be
