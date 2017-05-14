@@ -33,6 +33,41 @@ Types:
 
 Avatar types description is given below.
 
+Char avatar
+===========
+
+Draws a character on background with single color.
+
+|Demo 4| |Demo 5| |Demo 10| |Demo 12|
+
+**Usage:**
+
+.. code:: python
+
+
+    import pyavagen
+
+
+    avatar = pyavagen.Avatar(pyavagen.CHAR_AVATAR, size=500, string="Paul")
+    avatar.generate().save('avatar.png') 
+
+**Arguments:**
+
+-  ``size`` - size of output image. The integer type.
+-  ``string`` - first chars of two first words that separated whitespaces.
+   For example from string 'John Paul' draws "JP".
+   If passed an one word then draws a first char of this word.
+   For example from string 'John' draws "J". The string type.
+-  ``font`` - TrueType or OpenType font file. Path to font file. Default
+   Comfortaa-Regular.
+-  ``background_color`` - background color. If not passed that a will be
+   a random color from ``color_list``.
+-  ``font_size`` - size of font. The integer type. Has default value.
+-  ``font_color`` - color of font. The string type. Default white.
+-  ``font_outline`` - Outline of character. Default false.
+-  ``color_list`` - list of colors from which will be generating colors
+   for background. Default ``pyavagen.COLOR_LIST_FLAT``.
+
 Square avatar
 =============
 
@@ -68,40 +103,6 @@ Draws squares with different colors.
    list then will be generation a random color. There is also list of
    colors in material style - ``pyavagen.COLOR_LIST_MATERIAL``.
 
-Char avatar
-===========
-
-Draws a character on background with single color.
-
-|Demo 4| |Demo 5| |Demo 10| |Demo 12|
-
-**Usage:**
-
-.. code:: python
-
-
-    import pyavagen
-
-
-    avatar = pyavagen.Avatar(pyavagen.CHAR_AVATAR, size=500, string="Paul")
-    avatar.generate().save('avatar.png') 
-
-**Arguments:**
-
--  ``size`` - size of output image. The integer type.
--  ``string`` - first chars of two first words that separated whitespaces.
-   For example from string 'John Paul' draws "JP".
-   If passed an one word then draws a first char of this word.
-   For example from string 'John' draws "J". The string type.
--  ``font`` - TrueType or OpenType font file. Path to font file. Default
-   Comfortaa-Regular.
--  ``background_color`` - background color. If not passed that a will be
-   a random color from ``color_list``.
--  ``font_size`` - size of font. The integer type. Has default value.
--  ``font_color`` - color of font. The string type. Default white.
--  ``font_outline`` - Outline of character. Default false.
--  ``color_list`` - list of colors from which will be generating colors
-   for background. Default ``pyavagen.COLOR_LIST_FLAT``.
 
 Char square avatar
 ==================
