@@ -324,24 +324,36 @@ class CharAvatar(ColorListMixin, BaseAvatar):
 
         return img
 
+    def get_text_for_draw(self):
+        """Returns a text in uppercase for draw.text.
+
+        Returns two first chars of two first words that separated whitespaces.
+        For example from string 'John Paul' returns  "JP" .
+        If passed an one word then returns a first char of this word.
+        For example from string 'John' returns  "J" .
+
+        """
+
+        return ''.join([s[0] for s in self.string.split()[:2]]).upper()
+
     def generate(self):
         draw = ImageDraw.Draw(self.img)
         img_width, img_height = self.img.size
         font = ImageFont.truetype(font=self.font, size=self.font_size)
-        char = self.string[0].upper()
-        char_width, char_height = font.getsize(char)
-        char_offset_by_height = font.getoffset(char)[1]
+        text = self.get_text_for_draw()
+        text_width, text_height = font.getsize(text)
+        text_height_offset = font.getoffset(text)[1]
 
         x, y = (
-            (img_width - char_width) / 2,
-            ((img_height - char_height) / 2) - char_offset_by_height / 2
+            (img_width - text_width) / 2,
+            ((img_height - text_height) / 2) - text_height_offset / 2
         )
 
         if self.font_outline:
             for xy_offset in [(x - 1, y), (x + 1, y), (x, y - 1), (x, y + 1)]:
-                draw.text(xy=xy_offset, text=char, font=font, fill='black')
+                draw.text(xy=xy_offset, text=text, font=font, fill='black')
 
-        draw.text(xy=(x, y), text=char, font=font, fill=self.font_color)
+        draw.text(xy=(x, y), text=text, font=font, fill=self.font_color)
 
         return self.img
 
