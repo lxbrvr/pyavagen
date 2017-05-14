@@ -18,7 +18,7 @@ Generation different type avatars with possibility customization.
 Avatar types
 ============
 
-For avatar generation using the ``Avagen`` class.
+For avatar generation using the ``Avatar`` class.
 
 **Arguments:**
 
