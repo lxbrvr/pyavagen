@@ -367,8 +367,3 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
         self.img = CharAvatar.generate(self)
 
         return self.img
-
-CharSquareAvatar(size=200, squares_on_axis=3, blur_radius=0, string='G', font_outline=True).generate().save('f1.png', 'JPEG', quality=100)
-CharSquareAvatar(size=200, blur_radius=14, squares_on_axis=5, string='PO').generate().save('f2.png', 'JPEG', quality=100)
-CharSquareAvatar(size=200, blur_radius=0, string='B', font_color="black").generate().save('f3.png', 'JPEG', quality=100)
-CharSquareAvatar(size=200, squares_on_axis=5, blur_radius=0, string='L', font_size=180).generate().save('f4.png', 'PNG', quality=100)
