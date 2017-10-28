@@ -220,7 +220,7 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
                     fill=self._generate_square_color(),
                 )
 
-        self.img = self.img.rotate(self.rotate)
+        self.img = self.img.rotate(self.rotate, resample=Image.BICUBIC)
 
         distance_a = math.sqrt(2) * self.size / 2
         distance_b = size2x - self.size - distance_a
@@ -376,3 +376,4 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
 
         return self.img
 
+SquareAvatar(size=500, blur_radius=0).generate().show()
