@@ -6,7 +6,7 @@ Generation different type avatars with possibility customization.
 
 **Requirements:**
 
--  Python 3.6
+-  Python 3.3+
 -  Pillow
 
 **Installation:**
@@ -131,15 +131,15 @@ Testing
 
 Execute ``tox`` from the project root.
 
-.. |Demo 1| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo1.png?raw=true
-.. |Demo 2| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo2.png?raw=true
-.. |Demo 3| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo3.png?raw=true
-.. |Demo 11| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo11.png?raw=true
-.. |Demo 4| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo4.png?raw=true
-.. |Demo 5| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo5.png?raw=true
-.. |Demo 10| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo10.png?raw=true
-.. |Demo 12| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo12.png?raw=true
-.. |Demo 6| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo6.png?raw=true
-.. |Demo 7| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo7.png?raw=true
-.. |Demo 8| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo8.png?raw=true
-.. |Demo 9| image:: https://github.com/abalx/pyavagen/blob/master/examples/Demo9.png?raw=true
+.. |Demo 1| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo1.png?raw=true
+.. |Demo 2| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo2.png?raw=true
+.. |Demo 3| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo3.png?raw=true
+.. |Demo 11| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo11.png?raw=true
+.. |Demo 4| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo4.png?raw=true
+.. |Demo 5| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo5.png?raw=true
+.. |Demo 10| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo10.png?raw=true
+.. |Demo 12| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo12.png?raw=true
+.. |Demo 6| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo6.png?raw=true
+.. |Demo 7| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo7.png?raw=true
+.. |Demo 8| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo8.png?raw=true
+.. |Demo 9| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo9.png?raw=true

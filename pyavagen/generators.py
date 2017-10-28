@@ -118,11 +118,6 @@ class ColorListMixin(object):
 class SquareAvatar(ColorListMixin, BaseAvatar):
     """Draws squares with different colors.
 
-    Demo:
-        ../examples/demo1.png,
-        ../examples/demo2.png,
-        ../examples/demo3.png.
-
     Args:
         squares_on_axis: number of squares on axis. Has a default value.
         blur_radius: blur radius.
@@ -252,12 +247,6 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 class CharAvatar(ColorListMixin, BaseAvatar):
     """Draws a character on background with single color.
 
-    Demo:
-        ../examples/demo4.png,
-        ../examples/demo5.png.
-        ../examples/demo10.png.
-        ../examples/demo12.png.
-
     Args:
         string: string, the first character of which will be used for displaying
             on generated image.
@@ -371,18 +360,15 @@ class CharAvatar(ColorListMixin, BaseAvatar):
 
 
 class CharSquareAvatar(SquareAvatar, CharAvatar):
-    """Draws a character on background with squares with different colors.
-
-    Demo:
-        ../examples/demo6.png,
-        ../examples/demo7.png,
-        ../examples/demo8.png,
-        ../examples/demo9.png.
-
-    """
+    """Draws a character on background with squares with different colors."""
 
     def generate(self):
         self.img = SquareAvatar.generate(self)
         self.img = CharAvatar.generate(self)
 
         return self.img
+
+CharSquareAvatar(size=200, squares_on_axis=3, blur_radius=0, string='G', font_outline=True).generate().save('f1.png', 'JPEG', quality=100)
+CharSquareAvatar(size=200, blur_radius=14, squares_on_axis=5, string='PO').generate().save('f2.png', 'JPEG', quality=100)
+CharSquareAvatar(size=200, blur_radius=0, string='B', font_color="black").generate().save('f3.png', 'JPEG', quality=100)
+CharSquareAvatar(size=200, squares_on_axis=5, blur_radius=0, string='L', font_size=180).generate().save('f4.png', 'PNG', quality=100)
