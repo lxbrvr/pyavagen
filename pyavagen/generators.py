@@ -371,5 +371,3 @@ class CharSquareAvatar(SquareAvatar, CharAvatar):
         self.img = CharAvatar.generate(self)
 
         return self.img
-
-SquareAvatar(size=500, blur_radius=0).generate().show()
