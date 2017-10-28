@@ -13,6 +13,7 @@ class AvatarField(object):
     def __init__(self, validators=None, default=None):
         self.validators = validators
         self.default = default
+        self.name = None
 
     def __set_name__(self, owner, name):
         self.name = name

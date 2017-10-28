@@ -29,7 +29,22 @@ COLOR_LIST_MATERIAL = [
 ]
 
 
-class BaseAvatar(metaclass=abc.ABCMeta):
+class AvatarMeta(type):
+    def __new__(mcs, name, bases, attributes):
+        cls = super().__new__(mcs, name, bases, attributes)
+
+        for attr, obj in attributes.items():
+            if isinstance(obj, AvatarField):
+                obj.__set_name__(cls, attr)
+
+        return cls
+
+
+class CombinedMetaClasses(abc.ABCMeta, AvatarMeta):
+    pass
+
+
+class BaseAvatar(object, metaclass=CombinedMetaClasses):
     """Abstract class for avatar generators.
 
     Args:

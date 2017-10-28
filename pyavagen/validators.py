@@ -9,7 +9,10 @@ class MinValueValidator(object):
     def __call__(self, value, field_name):
         if value < self.limit_value:
             raise ValueError(
-                f'{field_name} must not be less {self.limit_value}'
+                '{field_name} must not be less {limit_value}'.format(
+                    field_name=field_name,
+                    limit_value=self.limit_value,
+                )
             )
 
 
@@ -26,7 +29,10 @@ class TypeValidator(object):
                 types = self.required_type
 
             raise ValueError(
-                f'{field_name} must be {types} type.'
+                '{field_name} must be {types} type.'.format(
+                    field_name=field_name,
+                    types=types,
+                )
             )
 
 
@@ -37,4 +43,6 @@ class ColorValidator(object):
             try:
                 ImageColor.getcolor(value, 'RGB')
             except Exception as e:
-                raise ValueError(f'{field_name} {e}')
+                raise ValueError(
+                    '{field_name} {e}'.format(field_name=field_name, e=e)
+                )

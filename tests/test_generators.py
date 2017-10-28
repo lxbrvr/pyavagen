@@ -21,11 +21,12 @@ class TestAvatar:
         raise AttributeError.
         """
 
-        avatar = pyavagen.Avatar(
-            avatar_type=avatar_type,
-            size=2,
-            **avatar_kwargs,
-        )
+        avatar_kwargs.update({
+            'avatar_type': avatar_type,
+            'size': 2,
+        }),
+
+        avatar = pyavagen.Avatar(**avatar_kwargs)
         assert isinstance(avatar.avatar_class, avatar_class)
 
     def test_avatar_class_arg_with_none(self):
@@ -49,11 +50,12 @@ class TestAvatar:
         'generate' method of 'Avatar' class should return Image.Image object.
         """
 
-        avatar = pyavagen.Avatar(
-            avatar_type=avatar_type,
-            size=2,
-            **avatar_kwargs,
-        )
+        avatar_kwargs.update({
+            'avatar_type': avatar_type,
+            'size': 2,
+        }),
+
+        avatar = pyavagen.Avatar(**avatar_kwargs)
 
         assert isinstance(avatar.generate(), Image.Image)
 
