@@ -30,7 +30,6 @@ COLOR_LIST_MATERIAL = [
 
 
 class BaseAvatar(metaclass=abc.ABCMeta):
-
     """Abstract class for avatar generators.
 
     Args:
@@ -102,7 +101,6 @@ class ColorListMixin(object):
 
 
 class SquareAvatar(ColorListMixin, BaseAvatar):
-
     """Draws squares with different colors.
 
     Demo:
@@ -237,7 +235,6 @@ class SquareAvatar(ColorListMixin, BaseAvatar):
 
 
 class CharAvatar(ColorListMixin, BaseAvatar):
-
     """Draws a character on background with single color.
 
     Demo:
@@ -359,7 +356,6 @@ class CharAvatar(ColorListMixin, BaseAvatar):
 
 
 class CharSquareAvatar(SquareAvatar, CharAvatar):
-
     """Draws a character on background with squares with different colors.
 
     Demo:

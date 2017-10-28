@@ -1,5 +1,4 @@
 class AvatarField(object):
-
     """Avatar helper.
 
     Checks and sets a passed value.
