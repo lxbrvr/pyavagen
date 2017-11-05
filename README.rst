@@ -2,7 +2,9 @@
 pyavagen
 ========
 
-Generation different type avatars with possibility customization.
+|build_badge| |versions_badge| |pypi_badge| |license_badge|
+
+Generation of customizable avatars.
 
 **Requirements:**
 
@@ -143,3 +145,15 @@ Execute ``tox`` from the project root.
 .. |Demo 7| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo7.png?raw=true
 .. |Demo 8| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo8.png?raw=true
 .. |Demo 9| image:: https://github.com/abalx/pyavagen/blob/master/examples/demo9.png?raw=true
+
+.. |build_badge| image:: https://travis-ci.org/abalx/pyavagen.svg?branch=master
+    :target: https://travis-ci.org/abalx/pyavagen
+
+
+.. |license_badge| image:: https://img.shields.io/github/license/abalx/pyavagen.svg
+    :target: https://github.com/abalx/pyavagen/blob/development/LICENSE
+    
+.. |pypi_badge| image:: https://img.shields.io/pypi/v/pyavagen.svg   
+    :target: https://pypi.python.org/pypi/pyavagen/0.3.0
+
+.. |versions_badge| image:: https://img.shields.io/pypi/pyversions/pyavagen.svg
