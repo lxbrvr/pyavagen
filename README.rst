@@ -154,6 +154,6 @@ Execute ``tox`` from the project root.
     :target: https://github.com/abalx/pyavagen/blob/development/LICENSE
     
 .. |pypi_badge| image:: https://img.shields.io/pypi/v/pyavagen.svg   
-    :target: https://pypi.python.org/pypi/pyavagen/0.3.0
+    :target: https://pypi.python.org/pypi/pyavagen/0.3.2
 
 .. |versions_badge| image:: https://img.shields.io/pypi/pyversions/pyavagen.svg
