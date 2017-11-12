@@ -15,7 +15,7 @@ setup(
     author='Alexander Abrosimov',
     author_email='to100100100@gmail.com',
     url='https://github.com/abalx/pyavagen',
-    description='Avatars generation of different types',
+    description='Generation of customizable avatars',
     long_description=open(os.path.join(cur_dir, 'README.rst')).read(),
     license='MIT',
     requires=['python (>= 3.3)', ],
@@ -27,7 +27,7 @@ setup(
         'pyavagen',
     ],
     include_package_data=True,
-    keywords=['image', 'avatar'],
+    keywords=['image', 'avatar', 'picture', 'generator'],
     classifiers=[
         'Development Status :: 4 - Beta',
         'Programming Language :: Python :: 3',
