@@ -18,7 +18,7 @@ setup(
     description='Avatars generation of different types',
     long_description=open(os.path.join(cur_dir, 'README.rst')).read(),
     license='MIT',
-    requires=['python (>= 3.3)',],
+    requires=['python (>= 3.3)', ],
     tests_require=['pytest'],
     install_requires=[
         'Pillow',

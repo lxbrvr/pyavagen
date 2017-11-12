@@ -31,7 +31,8 @@ class TestAvatarField:
         Checks launch of validators for a passed value.
         """
 
-        self.avatar_field.validators = [validators.MinValueValidator(limit_value=2)]
+        min_value_validator = validators.MinValueValidator(limit_value=2)
+        self.avatar_field.validators = [min_value_validator]
 
         with pytest.raises(Exception):
             self.avatar_field.run_validators(value=1)

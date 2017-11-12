@@ -112,7 +112,13 @@ class ColorListMixin(object):
         """
 
         color_list = self.color_list
-        return random.choice(color_list) if color_list else get_random_hex_color()
+        color = (
+            random.choice(color_list)
+            if color_list
+            else get_random_hex_color()
+        )
+
+        return color
 
 
 class SquareAvatar(ColorListMixin, BaseAvatar):
@@ -248,8 +254,8 @@ class CharAvatar(ColorListMixin, BaseAvatar):
     """Draws a character on background with single color.
 
     Args:
-        string: string, the first character of which will be used for displaying
-            on generated image.
+        string: string, the first character of which will be used for
+            displaying on generated image.
         font: TrueType or OpenType font file. Has default value.
         background_color: background color. If is None that will be generated
             random color.

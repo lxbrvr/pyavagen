@@ -13,7 +13,7 @@ class TestMinValueValidator:
         Should raises ValueError if a passed value is less than minimum value.
         """
 
-        v = self.validator(limit_value = self.min_value)
+        v = self.validator(limit_value=self.min_value)
 
         with pytest.raises(ValueError):
             v(value=self.min_value - 1, field_name=self.field_name)

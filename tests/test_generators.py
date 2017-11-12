@@ -10,7 +10,9 @@ class TestAvatar:
         argvalues=[
             (pyavagen.CHAR_AVATAR, pyavagen.CharAvatar, {'string': 'string'}),
             (pyavagen.SQUARE_AVATAR, pyavagen.SquareAvatar, {}),
-            (pyavagen.CHAR_SQUARE_AVATAR, pyavagen.CharSquareAvatar, {'string': 'string'}),
+            (pyavagen.CHAR_SQUARE_AVATAR, pyavagen.CharSquareAvatar, {
+                'string': 'string',
+            }),
         ]
     )
     def test_avatar_class_arg(self, avatar_type, avatar_class, avatar_kwargs):
@@ -98,7 +100,10 @@ class TestSquareAvatar:
     def avatar_object(self, avatar_data):
         return generators.SquareAvatar(**avatar_data)
 
-    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+    def test_compare_attributes_with_passed_values(
+            self,
+            avatar_object,
+            avatar_data):
         assert avatar_object.size == avatar_data['size']
         assert avatar_object.color_list == avatar_data['color_list']
         assert avatar_object.border_color == avatar_data['border_color']
@@ -128,9 +133,14 @@ class TestCharAvatar:
     def avatar_object(self, avatar_data):
         return generators.CharAvatar(**avatar_data)
 
-    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+    def test_compare_attributes_with_passed_values(
+            self,
+            avatar_object,
+            avatar_data):
+        assert (
+            avatar_object.background_color == avatar_data['background_color']
+        )
         assert avatar_object.size == avatar_data['size']
-        assert avatar_object.background_color == avatar_data['background_color']
         assert avatar_object.font_color == avatar_data['font_color']
         assert avatar_object.font_size == avatar_data['font_size']
         assert avatar_object.font_outline == avatar_data['font_outline']
@@ -175,9 +185,14 @@ class TestCharSquareAvatar:
     def avatar_object(self, avatar_data):
         return generators.CharSquareAvatar(**avatar_data)
 
-    def test_compare_attributes_with_passed_values(self, avatar_object, avatar_data):
+    def test_compare_attributes_with_passed_values(
+            self,
+            avatar_object,
+            avatar_data):
+        assert (
+            avatar_object.background_color == avatar_data['background_color']
+        )
         assert avatar_object.size == avatar_data['size']
-        assert avatar_object.background_color == avatar_data['background_color']
         assert avatar_object.font_color == avatar_data['font_color']
         assert avatar_object.font_size == avatar_data['font_size']
         assert avatar_object.font_outline == avatar_data['font_outline']
