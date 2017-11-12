@@ -5,4 +5,5 @@ python:
     - "3.5"
     - "3.6"
 install: pip install tox
+before_script: tox -e flake8
 script: tox -e $(echo py$TRAVIS_PYTHON_VERSION | tr -d .)
