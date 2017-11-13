@@ -1,6 +1,5 @@
 language: python
 install: pip install tox
-before_script: tox -e flake8
 matrix:
   include:
   - env: TOXENV=isort-check
