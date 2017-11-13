@@ -4,8 +4,7 @@ before_script: tox -e flake8
 matrix:
   include:
   - env: TOXENV=isort-check
-  - python: 3.6
-    env: TOXENV=flake8
+  - env: TOXENV=flake8
   - python: 3.3
     env: TOXENV=py33
   - python: 3.4
