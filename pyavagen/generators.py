@@ -1,17 +1,17 @@
-import os
 import abc
 import math
+import os
 import random
 
 from PIL import Image, ImageDraw, ImageFilter, ImageFont
 
 from pyavagen.fields import AvatarField
+from pyavagen.utils import get_random_hex_color
 from pyavagen.validators import (
-    TypeValidator,
     ColorValidator,
     MinValueValidator,
+    TypeValidator
 )
-from pyavagen.utils import get_random_hex_color
 
 
 COLOR_LIST_FLAT = [

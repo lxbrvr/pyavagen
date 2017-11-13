@@ -1,5 +1,6 @@
 import pytest
-from pyavagen import validators, utils
+
+from pyavagen import utils, validators
 
 
 def test_get_random_hex_color():

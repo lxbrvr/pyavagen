@@ -1,7 +1,8 @@
-from PIL import Image
 import pytest
+from PIL import Image
+
 import pyavagen
-from pyavagen import validators, generators
+from pyavagen import generators, validators
 
 
 class TestAvatar:

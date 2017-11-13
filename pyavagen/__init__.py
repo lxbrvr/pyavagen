@@ -1,11 +1,12 @@
-from pyavagen.version import *  # noqa
 from pyavagen.generators import (
     COLOR_LIST_FLAT,
     COLOR_LIST_MATERIAL,
-    SquareAvatar,
-    CharSquareAvatar,
     CharAvatar,
+    CharSquareAvatar,
+    SquareAvatar
 )
+from pyavagen.version import *  # noqa
+
 
 __all__ = [
     'Avatar',
